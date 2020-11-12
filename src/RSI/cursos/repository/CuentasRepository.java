@@ -6,7 +6,7 @@ import RSI.cursos.model.Cuenta;
 
 public interface CuentasRepository {
 	public void saveCuenta(Cuenta cuenta);
-	public Cuenta findCuenta(int numerocuenta);
+	public Cuenta findCuenta(long l);
 	public List<Cuenta> findAll();
 
 }

@@ -4,6 +4,8 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<context:annotation-config></context:annotation-config> <!-- permitir configuracion por anotaciones service,repositorio,autowired, etc -->
+		<context:component-scan base-package="RSI.cursos.service,RSI.cursos.repository"></context:component-scan> <!-- en donde tiene que buscar las etiquetas-->
 
 	<bean id="data"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -11,8 +13,8 @@
 			value="com.mysql.cj.jdbc.Driver" />
 		<property name="url"
 			value="jdbc:mysql://localhost:6033/TestSpring?serverTimezone=UTC" />
-		<property name="username" value="db_user" />
-		<property name="password" value="db_user_pass" />
+		<property name="username" value="root" />
+		<property name="password" value="my_secret_password" />
 	</bean>
 
 	<bean id="template"

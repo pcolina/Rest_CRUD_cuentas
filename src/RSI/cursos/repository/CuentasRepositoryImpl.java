@@ -20,7 +20,7 @@ public class CuentasRepositoryImpl implements CuentasRepository {
 	}
 
 	@Override
-	public Cuenta findCuenta(int numeroCuenta) {
+	public Cuenta findCuenta(long numeroCuenta) {
 		String sql= "select * from cuentas where numeroCuenta=?";
 		List<Cuenta> cuentas= template.query(sql, (rs, f) -> new Cuenta(rs.getInt("numeroCuenta"), rs.getDouble("saldo"), rs.getString("tipoCuenta")), numeroCuenta);
 		return cuentas.size()>0 ? cuentas.get(0):null;

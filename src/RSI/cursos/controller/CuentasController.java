@@ -22,7 +22,7 @@ public class CuentasController {
 	CuentasService service;
 	
 	@PostMapping(value="cuenta")
-	public String nuevaCuenta(@RequestParam("numeroCuenta") int numeroCuenta,
+	public String nuevaCuenta(@RequestParam("numeroCuenta") long numeroCuenta,
 			@RequestParam("saldo") double saldo ,
 			@RequestParam("tipoCuenta") String tipo )
 			{
