@@ -1,0 +1,18 @@
+version: '2'
+services:
+  mysql:
+    image: 'mysql:latest'
+    restart: always
+    volumes:
+      - './mysql_data:/var/lib/mysql'
+	MYSQL_DATABASE: cabin
+      MYSQL_USER: cabin
+      MYSQL_PASSWORD: cabinpw
+    environment:
+      - MYSQL_ROOT_PASSWORD: rsi_admin
+      - MYSQL_DATABASE: rsi
+      - MYSQL_USER: rsi
+      - MYSQL_PASSWORD: rsi123	
+    ports:
+      - '3307:3306'
+

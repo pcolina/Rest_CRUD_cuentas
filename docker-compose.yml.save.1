@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    image: 'mysql:latest'
+    restart: always
+    volumes:
+      - './pruebamysql_data:/var/lib/mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD: rsi_admin
+      - MYSQL_DATABASE: rsi
+      - MYSQL_USER: rsi
+      - MYSQL_PASSWORD: rsi123	
+    ports:
+      - '3307:3306'
+
