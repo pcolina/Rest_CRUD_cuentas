@@ -6,6 +6,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/WebContent/WEB-INF"/>
         <property name="java-output-path" value="/01_ejemplo_cuenta_web/build/classes"/>
-        <property name="context-root" value="02_ejemplo_cuenta_web_jdbc"/>
+        <property name="context-root" value="04_ejemplo_cuenta_web_data_jpa"/>
     </wb-module>
 </project-modules>

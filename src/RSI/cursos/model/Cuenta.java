@@ -1,12 +1,22 @@
 package RSI.cursos.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="cuentas")
 public class Cuenta {
+	@Id
 	private long numeroCuenta;
 	private double saldo;
 	private String tipoCuenta;
-	public Cuenta(long numeroCuenta2, double saldo, String tipoCuenta) {
+	public Cuenta() {
 		super();
-		this.numeroCuenta = numeroCuenta2;
+	}
+	public Cuenta(long numeroCuenta, double saldo, String tipoCuenta) {
+		super();
+		this.numeroCuenta = numeroCuenta;
 		this.saldo = saldo;
 		this.tipoCuenta = tipoCuenta;
 	}

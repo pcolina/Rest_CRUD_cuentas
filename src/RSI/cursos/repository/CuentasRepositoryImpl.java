@@ -1,35 +1,48 @@
 package RSI.cursos.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import RSI.cursos.model.Cuenta;
 @Repository
 public class CuentasRepositoryImpl implements CuentasRepository {
 
 	@Autowired
-	JdbcTemplate template;
+	CuentasJpaRepository repository;
 	
+	@Transactional
 	@Override
 	public void saveCuenta(Cuenta cuenta) {
-		String sql ="insert into cuentas (numeroCuenta, saldo, tipoCuenta) values (?,?,?)";
-		template.update(sql, cuenta.getNumeroCuenta(), cuenta.getSaldo(), cuenta.getTipoCuenta());
+		repository.save(cuenta);
 	}
 
 	@Override
 	public Cuenta findCuenta(long numeroCuenta) {
-		String sql= "select * from cuentas where numeroCuenta=?";
-		List<Cuenta> cuentas= template.query(sql, (rs, f) -> new Cuenta(rs.getInt("numeroCuenta"), rs.getDouble("saldo"), rs.getString("tipoCuenta")), numeroCuenta);
-		return cuentas.size()>0 ? cuentas.get(0):null;
+		return repository.findById((int) numeroCuenta).orElse(null);  
 	}
 
 	@Override
 	public List<Cuenta> findAll() {
-		String sql= "select * from cuentas";
-		return template.query(sql, (rs, f) -> new Cuenta(rs.getInt("numeroCuenta"), rs.getDouble("saldo"), rs.getString("tipoCuenta")));
+		return repository.findAll();
+	}
+
+	@Override
+	public void deleteByTipo(String tipo) {
+		repository.deleteByTipo(tipo);
+		
+	}
+
+	@Override
+	public List<Cuenta> findBySaldo(double v1, double v2) {
+		return repository.findBySaldo(v1, v2);
 	}
 
 }
