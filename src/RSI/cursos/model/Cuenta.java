@@ -8,22 +8,22 @@ import javax.persistence.Table;
 @Table(name="cuentas")
 public class Cuenta {
 	@Id
-	private long numeroCuenta;
+	private int numeroCuenta;
 	private double saldo;
 	private String tipoCuenta;
 	public Cuenta() {
 		super();
 	}
-	public Cuenta(long numeroCuenta, double saldo, String tipoCuenta) {
+	public Cuenta(int numeroCuenta, double saldo, String tipoCuenta) {
 		super();
 		this.numeroCuenta = numeroCuenta;
 		this.saldo = saldo;
 		this.tipoCuenta = tipoCuenta;
 	}
-	public long getNumeroCuenta(){
+	public int getNumeroCuenta(){
 		return numeroCuenta;
 	}
-	public void setNumeroCuenta(long numeroCuenta) {
+	public void setNumeroCuenta(int numeroCuenta) {
 		this.numeroCuenta = numeroCuenta;
 	}
 	public double getSaldo() {

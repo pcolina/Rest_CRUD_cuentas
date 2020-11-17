@@ -10,5 +10,7 @@ public interface CuentasRepository {
 	public List<Cuenta> findAll();
 	public void deleteByTipo(String tipo);
 	public List<Cuenta> findBySaldo(double v1, double v2);
+	public void deleteCuenta(int numeroCuenta);
+	public void actualizarCuenta(Cuenta cuenta);
 
 }

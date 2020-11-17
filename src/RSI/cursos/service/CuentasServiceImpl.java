@@ -27,4 +27,29 @@ public class CuentasServiceImpl implements CuentasService {
 		return repository.findAll();
 	}
 
+	@Override
+	public Cuenta findCuenta(int numeroCuenta) {
+		// TODO Auto-generated method stub
+		return repository.findCuenta(numeroCuenta);
+	}
+
+	@Override
+	public void deleteCuenta(int numeroCuenta) {
+		Cuenta cuenta=repository.findCuenta(numeroCuenta);
+		if (cuenta!=null) {
+			repository.deleteCuenta(numeroCuenta);
+		}
+		
+	}
+
+	@Override
+	public void updateCuenta(int numeroCuenta, double saldo) {
+		Cuenta cuenta=repository.findCuenta(numeroCuenta);
+		if (cuenta!=null) {
+			cuenta.setSaldo(saldo);
+			repository.saveCuenta(cuenta);
+		}
+		
+	}
+
 }

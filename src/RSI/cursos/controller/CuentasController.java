@@ -1,48 +1,57 @@
 package RSI.cursos.controller;
 
-import java.awt.print.Printable;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import RSI.cursos.model.Cuenta;
 import RSI.cursos.service.CuentasService;
 
-@Controller
+@RestController
 public class CuentasController {
 
 	@Autowired	
 	CuentasService service;
 	
-	@PostMapping(value="cuenta")
-	public String nuevaCuenta(@RequestParam("numeroCuenta") long numeroCuenta,
-			@RequestParam("saldo") double saldo ,
-			@RequestParam("tipoCuenta") String tipo )
-			{
-		Cuenta cuenta = new Cuenta(numeroCuenta, saldo, tipo);
+	@PostMapping(value="cuenta", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.TEXT_PLAIN_VALUE)
+	public String nuevaCuenta(@RequestBody Cuenta cuenta){ 
 		if(service.newCuenta(cuenta)) {
-			return "menu";
+			return "creada";
 		}else {
-			return "error";
+			return "no creada";
 		}
 	}
 	
-	@GetMapping(value="cuentas")
-	public String listaCuenta(HttpServletRequest request) {
+	@GetMapping(value="cuentas", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Cuenta> listaCuenta() {
+		return service.allCuentas();
+	}
+	
+	@GetMapping(value="cuenta/{numCuenta}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Cuenta cuenta(@PathVariable("numCuenta") int numeroCuenta) {
+		return service.findCuenta(numeroCuenta);
+	}
+	
+	@DeleteMapping(value="cuenta/{numCuenta}")
+	public void eliminarCuenta(@PathVariable("numCuenta") int numeroCuenta) {
+		service.deleteCuenta(numeroCuenta);
+	}
+		
+		
+	@PutMapping(value="cuenta/{numCuenta}/{saldo}")
+	public void actualizarCuenta(@PathVariable("numCuenta")int numeroCuenta,
+								@PathVariable("saldo") double saldo) {
 
-        System.out.println(">> listaCuenta");
-		List<Cuenta> cuentas=service.allCuentas();
-
-        System.out.println(">>>>"+cuentas);
-		request.setAttribute("cuentas", cuentas);
-		request.setAttribute("nombre", "Pablo");
-		return "cuentas";
+		System.out.println("numero de la cuenta: "+numeroCuenta+" saldo: "+saldo);
+		service.updateCuenta(numeroCuenta,  saldo);
+		
 	}
 }

@@ -16,8 +16,11 @@ public interface CuentasJpaRepository extends JpaRepository<Cuenta, Integer>{
 	void deleteByTipo(String tipo);
 	
 
-	@Query("Select c From Cuenta c Where c.saldo=>?1 and c.saldo<=?2")
+	@Query("Select c From Cuenta c Where c.saldo>=?1 and c.saldo<=?2")
 	List<Cuenta> findBySaldo(double v1, double v2);
+	
+	@Query("Select c From Cuenta c Where c.saldo>=?1 and c.saldo<=?2")
+	List<Cuenta> d(double v1, double v2);
 	
 
 }

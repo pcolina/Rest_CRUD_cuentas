@@ -45,4 +45,15 @@ public class CuentasRepositoryImpl implements CuentasRepository {
 		return repository.findBySaldo(v1, v2);
 	}
 
+	@Override
+	public void deleteCuenta(int numeroCuenta) {
+		 repository.deleteById(numeroCuenta);		
+	}
+
+	@Override
+	public void actualizarCuenta(Cuenta cuenta) {
+		 repository.save(cuenta);
+		
+	}
+
 }
